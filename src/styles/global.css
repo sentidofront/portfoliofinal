@@ -1,11 +1,13 @@
-/* Brand fonts — drop TANAshford.woff2 / IntroRust.woff2 into /public/fonts and
-   they take over automatically; until then the stacks fall back gracefully. */
+/* Brand fonts. TAN Ashford ships in /public/fonts. Intro Rust never did, so its
+   @font-face was removed: an absolute /fonts/ URL is the one path Vite cannot
+   rewrite for a project-page base, and it 404d on every load. Add the file and
+   put the rule back if you ever license it; the body stack already falls
+   through to Archivo. */
 /* Primary display face: TANASHFORDFONT.woff2 as requested. It carries no
    Latin A-Z, so 'Ashford OTF' sits next in the stack to supply those
    glyphs instead of dropping to a generic serif. */
 @font-face { font-family: 'TAN Ashford'; src: url('/fonts/TANASHFORDFONT.woff2') format('woff2'); font-weight: 400 900; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Ashford OTF'; src: url('/fonts/ashford-bold.otf') format('opentype'); font-weight: 400 900; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Intro Rust'; src: url('/fonts/IntroRust.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 
 :root {
   /* taupe / greige + red-orange accent (LP-Elements palette) */

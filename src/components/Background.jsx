@@ -4,8 +4,9 @@ import { useGLTF, useAnimations, Environment, Lightformer, ContactShadows } from
 import * as THREE from 'three';
 import { clone as skeletonClone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { scrollState, pointerState } from '../lib/scroll.js';
+import { asset } from '../lib/asset.js';
 
-const MODEL = '/models/moths_fluttering_around_a_light_source/scene.gltf';
+const MODEL = asset('models/moths_fluttering_around_a_light_source/scene.gltf');
 useGLTF.preload(MODEL);
 
 const mix = (a, b, e) => a + (b - a) * e;

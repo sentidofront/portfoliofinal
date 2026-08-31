@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+import { asset } from '../lib/asset.js';
 
 /* Background music + UI pop.
    The track begins the moment the phrase clears (`start` flips true).
    Nothing about the file is hardcoded: we decode it once, find where the
    audio actually begins (leading silence varies per master) and start there,
    looping back to that same point so the intro silence is never replayed. */
-const SRC = '/audio/track.mp3';
-const CLICK_SRC = '/audio/click.mp3';
+const SRC = asset('audio/track.mp3');
+const CLICK_SRC = asset('audio/click.mp3');
 const TARGET_VOLUME = 0.03;
 const CLICK_VOLUME = 0.09;
 const FADE_MS = 2500;

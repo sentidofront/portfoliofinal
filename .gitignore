@@ -1,0 +1,9 @@
+node_modules/
+
+# built by the Pages workflow, not committed
+dist/
+
+*.local
+.DS_Store
+Thumbs.db
+npm-debug.log*

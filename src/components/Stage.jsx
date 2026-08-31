@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { ACTS } from '../lib/acts.js';
 import { scrollState } from '../lib/scroll.js';
 import { PROFILE, SKILLS, CREDENTIALS, PURSUITS, EXPERIENCE } from '../lib/data.js';
+import { asset } from '../lib/asset.js';
 import Portfolio from './Portfolio.jsx';
 import Articles from './Articles.jsx';
 
@@ -24,7 +25,7 @@ function ActContent({ act }) {
         <div className="intro-accent" aria-hidden="true" />
         <div className="act-col intro">
           <h1 className="hero-lockup" data-par>
-            <img src="/elements/hero-lockup.png"
+            <img src={asset('elements/hero-lockup.png')}
                  alt="Guilherme Ribeiro — product design is a problem of longing." />
           </h1>
         </div>

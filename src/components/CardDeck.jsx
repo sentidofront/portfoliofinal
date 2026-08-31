@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { asset } from '../lib/asset.js';
 import { STUDIES } from '../lib/studies.js';
 import CaseStudy from './CaseStudy.jsx';
 
@@ -63,7 +64,7 @@ export default function CardDeck({ label, items, className = '' }) {
             aria-label={it.title ? `Open ${it.title}` : 'Open entry'}
           >
             <span className="pf-thumb">
-              {it.image ? <img src={it.image} alt="" /> : <Mockup kind={it.mockup} />}
+              {it.image ? <img src={asset(it.image)} alt="" /> : <Mockup kind={it.mockup} />}
             </span>
             <span className="pf-meta">
               <span className="pf-title">{it.title}</span>
@@ -85,7 +86,7 @@ export default function CardDeck({ label, items, className = '' }) {
             <button className="pf-close" onClick={() => setOpen(null)} aria-label="Close">✕</button>
 
             <div className="pf-panel-visual">
-              {open.image ? <img src={open.image} alt="" /> : <Mockup kind={open.mockup} />}
+              {open.image ? <img src={asset(open.image)} alt="" /> : <Mockup kind={open.mockup} />}
             </div>
 
             <div className="pf-panel-body">

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { contrast, grade } from '../lib/contrast.js';
+import { asset } from '../lib/asset.js';
 
 /* Full-length case-study reader. Portaled to <body> for the same reason the
    card modal is: an .act carries will-change:opacity,transform and would trap
@@ -403,7 +404,7 @@ export default function CaseStudy({ study, onClose }) {
             <figure className="cs-hero">
               {/* eager: the reader only mounts when opened, so the hero is always
                   above the fold and lazy would just delay the first thing seen */}
-              <img src={study.hero} alt={study.heroAlt || ''} decoding="async" />
+              <img src={asset(study.hero)} alt={study.heroAlt || ''} decoding="async" />
             </figure>
           )}
           <p className="cs-intro">{study.intro}</p>
