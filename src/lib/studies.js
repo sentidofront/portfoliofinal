@@ -19,6 +19,260 @@
 */
 
 export const STUDIES = {
+  /* ────────────────────────────  REUNE DIGITAL  ──────────────────────────── */
+  reune: {
+    kicker: 'Restaurant SaaS',
+    title: 'Reune Digital',
+    tagline: 'Head of Product. The brand, the landing page and the design system are mine.',
+    hero: '/work/reune-hero.webp',
+    heroAlt: 'The Reune Digital dashboard, showing the day of a restaurant in one screen',
+    link: {
+      label: 'Open the landing page',
+      url: 'https://reunedigital.com/',
+    },
+    intro:
+      'Reune is a management system for Brazilian restaurants: orders, tables, till, stock, kitchen, delivery and the books, in one place. It started in 2024 as an idea, went through research and a prototype, took investment, and is now a working SaaS product sold in four tiers. I set the direction and the standards, and I drew most of what a customer actually sees.',
+
+    blocks: [
+      {
+        kind: 'stats',
+        title: 'The company',
+        num: '01',
+        items: [
+          { k: 'Started', v: '2024', sub: 'idea to funded company' },
+          { k: 'Restaurants visited', v: '30+', sub: 'before the first screen' },
+          { k: 'Screens', v: '74', sub: 'in the panel' },
+          { k: 'Backend modules', v: '60+', sub: 'counted from the code' },
+          { k: 'Decisions logged', v: '46', sub: 'across ten fronts' },
+          { k: 'Plans', v: '4', sub: 'Essencial to Empresarial' },
+        ],
+      },
+      {
+        kind: 'text',
+        title: 'What the market looked like',
+        num: '02',
+        body: [
+          'Brazilian restaurant software was legacy. The systems worked, in the sense that they eventually produced a number, but they were built by people who had never watched a till at eight on a Friday. Dense grids, function keys, no thought given to who was actually holding the mouse.',
+          'That is a strange gap to find in an industry this large, and it is the whole reason Reune exists. The bet was not a better feature list. It was that a restaurant owner with no patience and no training budget would switch systems for one that simply made sense on the first day.',
+        ],
+      },
+      {
+        kind: 'text',
+        title: 'Thirty restaurants',
+        num: '03',
+        body: [
+          'Before anything was drawn, I visited more than thirty restaurants. Not interviews in a meeting room: kitchens, tills, service, the part of the evening where everything happens at once.',
+          'That is where the product actually came from. You cannot invent the moment a waiter retypes an app order into the till, or the argument at closing time about which channel the money came from. You have to stand there while it happens, and then design so it stops happening.',
+        ],
+      },
+      {
+        kind: 'table',
+        title: 'The four contexts',
+        num: '04',
+        lead:
+          'Almost every decision in the product depends less on the screen than on where the person is standing when they use it. Four conditions of use that cannot be compared to each other, and the split the rest of the work comes out of.',
+        cols: ['Context', 'Device and condition', 'What hurts'],
+        rows: [
+          ['Salão', 'Tablet, standing, one hand. Rush, noise, changing light, a finger rather than a cursor', 'Finding the right table in two seconds without mistouching'],
+          ['Caixa', 'Desktop, seated, queue waiting, money involved', 'Precision. An error costs money and trust'],
+          ['Produção', 'Large screen read from a distance, hands busy or dirty', 'Reading from far away and knowing what is running late'],
+          ['Gestão', 'Desktop or phone, outside the rush, long session', 'Trusting the number and taking it out of the system'],
+        ],
+      },
+      {
+        kind: 'quote',
+        title: 'Who it is really for',   // no heading is drawn; this feeds the reading marker
+        num: '05',
+        text:
+          'The classic mistake in this kind of product is to design everything for Gestão, who is the one asking, and ship it to Salão, who is the one using it all day.',
+        cite: 'Internal UX research, section 1',
+      },
+      {
+        kind: 'figure',
+        title: 'Five channels, one queue',
+        num: '06',
+        name: 'one-queue',
+        lead: 'The single decision the rest of the product hangs off.',
+        caption:
+          'iFood, 99Food and aiqfome bring in the delivery apps. Goomer and Wabiz bring the digital menu, the table QR code and the self-service totem. All of it lands in the same panel as the order taken at the table, tagged with where it came from. Nobody retypes an app order into the till, stock comes down the same way whatever the source, and the end of day adds every channel into one report.',
+      },
+      {
+        kind: 'list',
+        title: 'States the product invents',
+        num: '07',
+        lead:
+          'The database stores what happened. An operation needs to know what is pending, and that is almost never a column. Four states that exist only because the product derives them.',
+        items: [
+          { k: 'Table needs clearing', v: 'The backend has no such status: a table returns to available when the bill closes. The state is born in the front end, watching the transition from occupied-with-a-bill to free-and-empty, and it lives in localStorage so it survives a refresh. It fades on its own, so a forgotten table does not become permanent visual noise' },
+          { k: 'Table colour comes from the bill', v: 'The block colour is computed from open bills rather than the raw status field. Served is deliberately neutral, because a served table asks nothing of anyone and should not compete with one that is waiting' },
+          { k: 'Audit trail from timestamps', v: 'The audit screen reconstructs history from entity timestamps instead of requiring a log table that was filled in from day one. The backend resolves the entity name before the handler, so the trail says which user was deleted rather than users #365' },
+          { k: 'RFV by quintile of its own base', v: 'Recency, frequency and value are ranked against that restaurant’s own customers, not a fixed threshold. A neighbourhood place and an all-you-can-eat have incomparable visit rates, and a fixed cut would misclassify both' },
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'Where the software meets the kitchen',
+        num: '08',
+        lead:
+          'The part most competitors leave to the notebook next to the tablet: scales, buffet counters, ovens, paper.',
+        items: [
+          { k: 'Scale over a serial port', v: 'Reads a real URANO POP-S live, with two separate tare values because they are two separate problems: the standing weight of the dish, and zeroing whatever container is on the plate right now' },
+          { k: 'Buffet lanes on a rotation timer', v: 'Cold and hot stations, each with a timer that says when the food needs checking. No till models this, and exposed food has a deadline' },
+          { k: 'Prep runs with the browser closed', v: 'Recipes can repeat on a schedule. A cron writes the stock movement whether or not anyone has the panel open, because kitchen prep happens at six in the morning' },
+          { k: 'Table timer as a business rule', v: 'It starts when the first order is delivered and orders are still outstanding, and clears itself when none are. What matters is how long the table has been waiting, not how old any single order is' },
+          { k: 'Stock labels in millimetres', v: 'The on-screen preview uses the same builder as the final PDF, so what you see is literally what prints. It fills what the system knows and leaves a blank line for what it does not, because a pen still works' },
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'Where an order is born',
+        num: '09',
+        lead:
+          'Several front doors into the same bill. The decision was to privilege none of them.',
+        items: [
+          { k: 'A WhatsApp bot that reads a filled-in template', v: 'The parser tolerates accents and case, and matches each line against the menu in three passes: normalised equality, then contains, then starts-with. Unmatched items go back to the customer to resend. It deliberately avoids the normal ticket path, which demands an open till and a human attendant, because the bot has neither and has to work when the till is shut' },
+          { k: 'The floor map as a grid of targets', v: 'Explicitly not a floor plan. Large blocks coloured by state, sized to be hit quickly with a thumb on a tablet' },
+          { k: 'Customer lookup by phone', v: 'Search used to be by name only. The real case is answering the phone, where the caller says a number, not the name on file. Registering a new customer now happens inside the order rather than abandoning it' },
+          { k: 'Bulk entry at end of shift', v: 'Recognises that paper exists. Rather than pretending every order passes through the system live, it gives a fast way to reconcile the tickets that did not' },
+          { k: 'Availability that propagates', v: 'Pausing an item removes it from the digital menu, the PDF, the waiter app and the till, and makes order creation refuse it, including through the bot' },
+        ],
+      },
+      {
+        kind: 'text',
+        title: 'What the marketplace owns',
+        num: '10',
+        body: [
+          'The most unusual decision in the system is a piece of restraint. A customer who arrives through iFood, 99food, Goomer, Keeta, WAbiz or aiqfome does not become a contact you can message. The marketplace owns that relationship, and the product says so out loud: the contact appears with the name and phone masked. You can see what they are worth, how much they spent, which channel and when. You cannot call them. Unmasking costs a few cents per contact.',
+          'The vocabulary is deliberate too. The word "lead" is kept away from this screen, because there is a separate Leads screen for imported people who have never bought. Calling someone with three purchases a lead would blur two different things in the head of whoever is using it.',
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'The owner’s arithmetic',
+        num: '11',
+        lead:
+          'The calculator is the one screen that manages nothing. It replaces the paper an owner did the sums on before setting a price.',
+        items: [
+          { k: 'Price with platform fees built in', v: 'Five tabs: selling price after commission, the same dish compared across channels, cost of goods, break-even, and the fees themselves. Comparing one dish across channels is the sum that decides whether being on iFood is worth it, and no till asks it' },
+          { k: 'Fees stored per restaurant', v: 'The built-in constants are market reference with a checked-on date, used for the first visit and the reset button, because marketplace commission is negotiated case by case' },
+          { k: 'Tax notes as drafts', v: 'An invoice can be saved without going to the tax authority and issued later from the list' },
+          { k: 'Reports built to leave', v: 'CSV export and a dedicated print stylesheet. The hypothesis is explicit: the manager does not want to look at the dashboard, they want the number out of the system and into an accountant’s inbox' },
+          { k: 'A billing banner that cannot be dismissed', v: 'It sits above the header and pushes content down rather than floating over it. A warning that scrolls away is not warning anyone' },
+        ],
+      },
+      {
+        kind: 'text',
+        title: 'The system outside the tab',
+        num: '12',
+        body: [
+          'The premise that changes everything: during service the panel is in the background. The operator is in WhatsApp, in iFood, in another program. A notice that only exists inside the page notifies nobody, and for a while that was the bug. Orders arrived and nobody knew.',
+          'So alerts now run in three layers, including operating-system notifications that surface over any other window. The sounds are synthesised on the spot from a few oscillators rather than shipped as audio files, which means a different sound per event type and no downloads. That is information through the ear, not decoration: the operator knows what arrived without looking.',
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'Design system and access',
+        num: '13',
+        lead:
+          'Less about pretty components, more about not deciding the same thing again on every screen.',
+        items: [
+          { k: 'One home for chart chrome', v: 'Axis, gridline, tooltip, bar radius and width ceiling moved out of the screen that was already the de facto reference and into a shared module, so style divergence stops being possible by accident' },
+          { k: 'Every empty state has an exit', v: 'The same block had been copied into three screens with three different greys. A dead end with no action never lets someone find out the tool does that thing' },
+          { k: 'Skeletons instead of spinners', v: 'Analysis screens load into the shape the content will occupy, so nothing jumps in front of someone who is reading' },
+          { k: 'Visible focus, with one exception', v: 'A global focus ring, suppressed on form fields where it drew a second rectangle inside the one already there. Label and field association on the profile screen was missing entirely, which is a defect rather than pending polish' },
+          { k: 'Permission per tab, not per screen', v: 'Screens with internal tabs now check tab by tab. Existing groups would have locked current customers out on the switch, so the profiles had to be backfilled before release' },
+          { k: 'Front-end permission is a navigation map', v: 'It is declared in the file as navigation, not as protection. Anyone calling the API directly is stopped by the backend guard, which is where the rule actually holds. Confusing the two is the classic hole: hide the button, leave the route open' },
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'The method',
+        num: '14',
+        lead:
+          'The least visible part, and probably the most durable: the product records why each decision was made, including what was wrong before and what is still unresolved.',
+        items: [
+          { k: 'Comments explain the decision', v: 'The header of each file describes the problem that existed and what was deliberately left out, rather than restating the syntax below it' },
+          { k: 'Hypotheses marked as hypotheses', v: 'The research document separates what was observed from what was assumed, and closes with a section saying plainly that none of it has been watched with a real user of this product yet' },
+          { k: 'Risks declared before anyone complains', v: 'The heuristic review lists what should break, ordered by risk rather than by effort. An export button that opens a print dialog is first, because it promises a file and delivers something else' },
+          { k: 'Instrument before shipping', v: 'Baselines are defined ahead of the change: time from free table to order created, share of orders with an identified customer, drag error rate measured as a move undone within five seconds' },
+        ],
+      },
+      {
+        kind: 'quote',
+        title: 'The signal worth trusting',
+        num: '15',
+        text:
+          'The most reliable signal is not what someone says in a test. It is what they do when they think nobody is watching. For example, still using the notebook next to the tablet.',
+        cite: 'Internal UX research, section 4.4',
+      },
+      {
+        kind: 'list',
+        title: 'What is still open',
+        num: '16',
+        lead:
+          'Carried over from the internal review rather than tidied away, because these are the ones a usability test should go after first.',
+        items: [
+          { k: 'Export to PDF', v: 'The label promises a file and opens the browser print dialog. First candidate for testing' },
+          { k: 'Colour on the floor map', v: 'Colour is the main carrier of meaning. There is an icon and a short label to soften it, but the research marks this as needing to be checked with a user rather than assumed' },
+          { k: 'Missing print client', v: 'Without QZ Tray installed the message needs to say what to install' },
+          { k: 'Automatic tax issuing', v: 'A failure is swallowed into a log. The manual path is the reliable one and stays recommended until the automatic one reports on screen' },
+        ],
+      },
+      {
+        kind: 'table',
+        title: 'The pricing ladder',
+        num: '17',
+        lead:
+          'Four tiers, priced annually, each one gated on what a restaurant of that size genuinely needs rather than on arbitrary limits. Getting this ladder right is product work, not a spreadsheet exercise.',
+        cols: ['Plan', 'Monthly, billed annually', 'For'],
+        rows: [
+          ['Essencial', 'R$ 242,99', 'Small operations that need the basics without complexity'],
+          ['Profissional', 'R$ 341,99', 'Restaurants expanding, with more visibility and control'],
+          ['Premium', 'R$ 467,99', 'Larger operations, from the order through to the till'],
+          ['Empresarial', 'On request', 'Chains and franchises needing a bespoke setup'],
+        ],
+        note: 'Annual billing carries a 10 per cent discount. The top tier adds WhatsApp conversations, a self-service totem, audit, and market and popularity analysis.',
+      },
+      {
+        kind: 'swatches',
+        title: 'The brand',
+        num: '18',
+        lead:
+          'I designed the wordmark: REUNE with the U replaced by a red circle holding a fork and knife. White ground, charcoal text, one red doing all the shouting.',
+        items: [
+          { name: 'Primary red', hex: '#D81F1F', note: 'Logo mark, buttons, accents' },
+          { name: 'Landing accent', hex: '#C91818', note: 'The red as it ships on the site' },
+          { name: 'Charcoal', hex: '#1E1E1E', note: 'Text and dark bands' },
+          { name: 'Section ground', hex: '#F6F6F4', note: 'Light sections against white' },
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'The landing page',
+        num: '19',
+        lead:
+          'Designed and built by me, in Portuguese, at reunedigital.com. It has to do sales work, not just look like a product site.',
+        items: [
+          { k: 'Live product in the hero', v: 'The dashboard is shown running rather than described, so the first thing a visitor sees is the thing they are buying' },
+          { k: 'The integrations section', v: 'Argues the one-queue idea directly, since that is what competitors cannot match' },
+          { k: 'Eleven niche pages', v: 'Pizzaria, lanchonete, hamburgueria, delivery, doceria, açaí, bar, marmitaria, japonês, franquias, each aimed at how that owner searches' },
+          { k: 'A working blog', v: 'Practical pieces on pricing a dish, closing the till and marketplace versus own delivery, written for the owner rather than for the algorithm' },
+        ],
+      },
+      {
+        kind: 'list',
+        title: 'What I do here',
+        num: '20',
+        lead: 'This is the project where the roles stopped being separable.',
+        items: [
+          { k: 'Head of Product', v: 'Direction, roadmap, scope and the calls about what ships and what waits' },
+          { k: 'Design', v: 'The product itself, the design system behind it, and the standards the team works to' },
+          { k: 'Brand', v: 'The logo, the palette, the voice, and being the face of it publicly' },
+          { k: 'Front-end', v: 'The landing page is my design and my code' },
+        ],
+      },
+    ],
+  },
   /* ─────────────────────────────  COSA NOSTRA  ───────────────────────────── */
   cosanostra: {
     kicker: 'Design system · Self-initiated',

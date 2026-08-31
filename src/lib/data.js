@@ -119,6 +119,21 @@ export const PURSUITS = [
    will use it instead. */
 export const PROJECTS = [
   {
+    id: 'reune',
+    title: 'Reune Digital',
+    client: 'Reune Digital',
+    year: '2024 — present',
+    role: 'Head of Product · Design · Brand',
+    mockup: 'dashboard',
+    image: '/work/reune-thumb.webp',
+    study: 'reune',
+    summary:
+      'A management system for Brazilian restaurants, taken from an idea to a funded company. Orders, tables, till, stock, kitchen and delivery in one place, with five sales channels landing in a single queue.',
+    detail:
+      'Research first: more than thirty restaurants visited before anything was drawn. I am Head of Product, and the brand, the product design and the landing page are mine.',
+    tags: ['SaaS', 'Product Strategy', 'Research', 'Brand', 'Front-end'],
+  },
+  {
     id: 'cosanostra',
     title: 'Cosa Nostra',
     client: 'Self-initiated',
@@ -186,19 +201,6 @@ export const PROJECTS = [
     detail:
       'Designed the customer-facing surface for provisioning mining capacity and tracking returns, plus the internal views for rig health. Heavy data density meant establishing a strict type and spacing scale before any screen work began.',
     tags: ['Crypto', 'Mining', 'Design System', 'Data Density'],
-  },
-  {
-    id: 'reune',
-    title: 'Reune Digital',
-    client: 'Reune',
-    year: '2026',
-    role: 'CMO & Head of Product',
-    mockup: 'dashboard',
-    summary:
-      'Product direction and the design system behind the platform serving restaurant clients.',
-    detail:
-      'Set the roadmap as Product Owner while keeping the design function in-house: component library, UX standards and critique. Positioning and the acquisition funnel run alongside the product work, so the brand and the interface are built from the same decisions.',
-    tags: ['Product Strategy', 'Design System', 'Leadership', 'Brand'],
   },
   {
     id: 'dao',

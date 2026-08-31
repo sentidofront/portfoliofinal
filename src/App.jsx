@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useScrollEngine } from './hooks/useScrollEngine.js';
 import { ACTS } from './lib/acts.js';
 import Background from './components/Background.jsx';
+import Boundary from './components/Boundary.jsx';
 import Backdrop from './components/Backdrop.jsx';
 import Cursor from './components/Cursor.jsx';
 import Ambience from './components/Ambience.jsx';
@@ -17,10 +18,13 @@ export default function App() {
   return (
     <>
       <Backdrop />
-      {/* small moths render behind the hero lockup for depth */}
-      <Background layer="back" />
+      {/* small moths render behind the hero lockup for depth.
+          Both canvases are wrapped: if WebGL is unavailable the 3D drops out
+          and the rest of the page carries on, rather than the whole tree
+          unmounting into a blank screen. */}
+      <Boundary><Background layer="back" /></Boundary>
       <Stage />
-      <Background />
+      <Boundary><Background /></Boundary>
       <div className="grain-noise" />
       <div className="grain" />
       <div className="vignette" />

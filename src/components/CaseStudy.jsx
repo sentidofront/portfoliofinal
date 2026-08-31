@@ -90,7 +90,41 @@ function ProcessLine() {
   );
 }
 
-const FIGURES = { 'token-layers': TokenLayers, 'colour-rule': ColourRule, 'process-line': ProcessLine };
+
+/* Six places an order can come from, one panel it lands in. The accent marks
+   the queue itself, since that is the claim the section is making. */
+function OneQueue() {
+  const sources = [
+    ['iFood', 'delivery'], ['99Food', 'delivery'], ['aiqfome', 'delivery'],
+    ['Goomer', 'menu · QR'], ['Wabiz', 'menu · app'], ['Salão', 'in house'],
+  ];
+  const W = 96, GAP = 8, X0 = 14;
+  return (
+    <svg viewBox="0 0 640 196" className="cs-svg" role="img"
+         aria-label="Five sales channels and the in-house order all arriving in a single queue">
+      {sources.map(([name, kind], i) => {
+        const x = X0 + i * (W + GAP);
+        const cx = x + W / 2;
+        return (
+          <g key={name}>
+            <rect x={x} y="10" width={W} height="42" rx="3" className="cs-fig-box" />
+            <text x={cx} y="30" className="cs-fig-lbl">{name}</text>
+            <text x={cx} y="44" className="cs-fig-tag">{kind}</text>
+            <path d={`M${cx},52 L${cx},76 L320,96 L320,116`} className="cs-fig-arrow" fill="none" />
+          </g>
+        );
+      })}
+      <rect x={X0} y="128" width={640 - X0 * 2} height="50" rx="3"
+            className="cs-fig-box cs-fig-queue" />
+      <rect x={X0} y="128" width="4" height="50" className="cs-fig-accent" />
+      <text x="320" y="150" className="cs-fig-lbl">ONE QUEUE</text>
+      <text x="320" y="166" className="cs-fig-tag">every order tagged with where it came from</text>
+    </svg>
+  );
+}
+
+const FIGURES = { 'token-layers': TokenLayers, 'colour-rule': ColourRule,
+                  'process-line': ProcessLine, 'one-queue': OneQueue };
 
 
 /* Single-series horizontal bars. Length encodes the value, so nothing is
@@ -275,6 +309,17 @@ function Block({ b }) {
         {b.lead && <p className="cs-lead">{b.lead}</p>}
         {Fig && <div className="cs-figure"><Fig /></div>}
         {b.caption && <p className="cs-note">{b.caption}</p>}
+      </section>
+    );
+  }
+
+  if (b.kind === 'quote') {
+    return (
+      <section className="cs-sec cs-quote-sec">
+        <blockquote className="cs-quote">
+          <p>{b.text}</p>
+          {b.cite && <cite>{b.cite}</cite>}
+        </blockquote>
       </section>
     );
   }
