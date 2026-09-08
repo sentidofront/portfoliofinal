@@ -1,7 +1,9 @@
-// Source content extracted from Guilherme Carvalho's CV.
+// Source content extracted from Guilherme Ribeiro's CV.
+// PROFILE.name is the single source for the page title, the Open Graph tags,
+// the JSON-LD Person and llms.txt — one edit here renames the site everywhere.
 
 export const PROFILE = {
-  name: 'Guilherme Carvalho',
+  name: 'Guilherme Ribeiro',
   role: 'CMO & Head of Product · Product Designer',
   location: 'Praia Grande · SP · Brazil',
   phone: '+55 (13) 99776-0984',
@@ -82,19 +84,119 @@ export const EXPERIENCE = [
   },
 ];
 
+/* Capabilities. Each entry is [ name, level, note? ].
+
+   level  4 Lead · 3 Advanced · 2 Proficient · 1 Working  (see SKILL_LEVELS)
+   note   optional; when absent the panel falls back to the level definition,
+          so a term never opens an empty box. Written only where the claim can
+          be tied to real work rather than padded out for every row. */
+export const SKILL_LEVELS = {
+  5: { name: 'Lead',       gloss: 'I set the standard here, and other people work to it.' },
+  4: { name: 'Advanced',   gloss: 'Used repeatedly on shipped, paid work.' },
+  3: { name: 'Proficient', gloss: 'Shipped with it. I bring in a specialist for the deep end.' },
+  2: { name: 'Working',    gloss: 'Enough to be useful, and to brief a specialist properly.' },
+  1: { name: 'Familiar',   gloss: 'I can read it and work alongside it. I would not claim to own it.' },
+};
+
 export const SKILLS = {
-  product: ['Product Strategy', 'Roadmapping', 'Backlog & Prioritisation', 'Scope Definition',
-            'Product Discovery', 'Stakeholder Alignment', 'Design Ops', 'Go-to-Market'],
-  ux:      ['User Research', 'Interviews & Surveys', 'Personas', 'User Stories', 'User Flows',
-            'Card Sorting', 'Usability Testing', 'A/B Testing', 'Heuristic Evaluation', 'Accessibility'],
-  ui:      ['Design Systems', 'Component Libraries', 'Wireframing', 'Low → High Fidelity',
-            'Prototyping', 'Mockups', 'Responsive Layout', 'Desktop & Mobile', 'Typography'],
-  tooling: ['Figma', 'Miro', 'Webflow', 'Framer', 'Adobe XD', 'Photoshop', 'After Effects',
-            'InDesign', 'Illustrator', 'DaVinci'],
-  code:    ['JavaScript', 'React', 'Vue', 'Angular', 'Python', 'TWIG', 'CSS', 'SPAs',
-            'Git & GitHub', 'Linux'],
-  mind:    ['Neuromarketing', 'Consumer Psychology', 'Cognitive Biases', 'UX Writing',
-            'Copywriting', 'Data Science', 'Prompt Engineering'],
+  product: [
+    ['Product Strategy', 5, 'Reune went from an idea to a funded company on a strategy I owned end to end.'],
+    ['Product Discovery', 5, 'More than thirty restaurants visited before a single screen was drawn.'],
+    ['Backlog & Prioritisation', 5, 'Forty-six decisions across ten fronts, ordered by what breaks service first.'],
+    ['Roadmapping', 5],
+    ['Scope Definition', 5],
+    ['Continuous Discovery', 4],
+    ['Jobs to be Done', 4],
+    ['Stakeholder Alignment', 4],
+    ['Metrics & OKRs', 4],
+    ['Pricing & Packaging', 4, 'Four tiers and seat billing, priced against what a restaurant already pays.'],
+    ['Design Ops', 4],
+    ['Go-to-Market', 4],
+  ],
+  ux: [
+    ['User Research', 5, 'Field research in kitchens and dining rooms, not a lab.'],
+    ['Information Architecture', 5, 'Five sales channels collapsed into one queue an operator can actually work.'],
+    ['User Flows', 5],
+    ['Interviews & Surveys', 5],
+    ['Usability Testing', 5],
+    ['Service Design', 4, 'Salao, Caixa, Producao and Gestao mapped as four contexts with different hardware and different pain.'],
+    ['Journey Mapping', 4],
+    ['Personas', 4],
+    ['User Stories', 4],
+    ['Card Sorting', 4],
+    ['Heuristic Evaluation', 4],
+    ['Accessibility', 4, 'Contrast, focus order and target size treated as acceptance criteria, not a later audit.'],
+    ['Design QA', 4],
+    ['A/B Testing', 3],
+  ],
+  ui: [
+    ['Design Systems', 5, 'Cosa Nostra: thirty-four documented components with a governance section saying who may change them.'],
+    ['Design Tokens', 5, 'Three token layers, both themes drawn rather than derived.'],
+    ['Brand Identity', 5, 'The Reune mark, palette and type system are mine.'],
+    ['Component Libraries', 4],
+    ['Typography', 4],
+    ['Wireframing', 4],
+    ['Low to High Fidelity', 4],
+    ['Prototyping', 4],
+    ['Responsive Layout', 4],
+    ['Mockups', 4],
+    ['Data Visualisation', 4, 'Dense operational dashboards where one accent carries all the meaning.'],
+    ['Desktop & Mobile', 4],
+    ['Motion Design', 3],
+    ['Micro-interactions', 3],
+  ],
+  ai: [
+    ['Prompt Engineering', 5],
+    ['AI-Assisted Delivery', 5, 'This site, Magic Sprite and the Reune front-end were all built with an agent in the loop.'],
+    ['AX Design', 4, 'Agent Experience: designing the surface a model reads and acts on, not just the one a person sees.'],
+    ['AI Product Design', 4],
+    ['Context Engineering', 4],
+    ['Agentic Workflows', 3],
+    ['Human-AI Interaction', 3],
+    ['Conversational Design', 3],
+    ['Evaluation & Guardrails', 2],
+    ['RAG & Retrieval', 2],
+    ['Multimodal Interfaces', 2],
+  ],
+  tooling: [
+    ['Figma', 5],
+    ['Claude Code', 5],
+    ['Illustrator', 4],
+    ['Photoshop', 4],
+    ['Miro', 3],
+    ['Webflow', 3],
+    ['Framer', 3],
+    ['After Effects', 2],
+    ['InDesign', 2],
+    ['DaVinci', 1],
+    ['Adobe XD', 1],
+  ],
+  code: [
+    ['CSS', 5],
+    ['React', 4, 'This portfolio, the Reune admin tool and the Morrigan atlas.'],
+    ['JavaScript', 4],
+    ['Git & GitHub', 4],
+    ['Vite', 3],
+    ['SPAs', 3],
+    ['GSAP', 3],
+    ['Three.js & R3F', 3, 'The WebGL stage this page is running on.'],
+    ['Python', 3],
+    ['Vue', 2],
+    ['Angular', 2],
+    ['TWIG', 1],
+    ['WebGL', 1],
+    ['Linux', 1],
+  ],
+  mind: [
+    ['Neuromarketing', 5, 'Consumer Neuroscience, Copenhagen Business School.'],
+    ['Consumer Psychology', 5, 'Cognitive Psychology & Neuropsychology, Cambridge.'],
+    ['Cognitive Biases', 4],
+    ['Behavioural Economics', 4],
+    ['UX Writing', 4],
+    ['Decision Architecture', 3],
+    ['Copywriting', 3],
+    ['Data Science', 2],
+  ],
 };
 
 export const CREDENTIALS = [
@@ -149,6 +251,21 @@ export const PROJECTS = [
     tags: ['Design System', 'Tokens', 'Accessibility', 'Governance'],
   },
   {
+    id: 'magicsprite',
+    title: 'Magic Sprite',
+    client: 'Self-initiated',
+    year: '',
+    role: 'Design & Development',
+    mockup: 'web',
+    image: '/work/magicsprite-thumb.webp',
+    url: '',
+    summary:
+      'A pixel art editor and animation tool. I designed it and I wrote it, aimed at the friction that makes spriting and frame-by-frame animation slower than the drawing itself.',
+    detail:
+      'Design and code are both mine here, which is the reason it sits on this list rather than a shelf. The target is the gap between having an idea for a sprite and watching it move: the repetitive setup, the fiddly frame work, and the small steps that break concentration between the two.',
+    tags: ['Pixel Art', 'Animation', 'Creative Tools', 'Design & Code'],
+  },
+  {
     id: 'axis',
     title: 'Axis',
     client: '',
@@ -162,71 +279,6 @@ export const PROJECTS = [
     detail:
       'Neutral grey carries all the structure. One pastel cyan carries meaning, and only three: a value under live control, the active navigation item, or a number that needs a decision. Nothing else is coloured.',
     tags: ['Industrial', 'SCADA', 'Data Density', 'Dark UI'],
-  },
-  {
-    id: 'azpay',
-    title: 'AZ Pay',
-    client: 'Azape',
-    year: '2025',
-    role: 'Product Designer',
-    mockup: 'mobile',
-    summary:
-      'A mobile fintech wallet handling crypto and Pix payments — designed around trust, speed and financial compliance.',
-    detail:
-      'Owned the end-to-end product design: onboarding and KYC, wallet and balance states, Pix transfer flows and crypto conversion. The challenge was carrying regulatory requirements without making the interface feel bureaucratic, so the flows lean on progressive disclosure and plain-language copy.',
-    tags: ['Fintech', 'Mobile', 'Crypto & Pix', 'Compliance'],
-  },
-  {
-    id: 'buffon',
-    title: 'Buffon',
-    client: 'Azape',
-    year: '2024',
-    role: 'Product Designer',
-    mockup: 'dashboard',
-    summary:
-      'Fuel logistics platform — fleet, routing and supply operations condensed into one operational dashboard.',
-    detail:
-      'Research with operations staff surfaced that the real job was exception handling, not routine monitoring. The dashboard was rebuilt around alerts and deviations first, with the full fleet table as a secondary view, cutting the time to spot a stalled delivery.',
-    tags: ['Logistics', 'Enterprise SaaS', 'Dashboard', 'Research'],
-  },
-  {
-    id: 'criptohost',
-    title: 'Cripto.Host',
-    client: 'Azape',
-    year: '2024',
-    role: 'Product Designer',
-    mockup: 'web',
-    summary:
-      'Cryptocurrency hosting and mining platform — rig monitoring, contracts and payouts.',
-    detail:
-      'Designed the customer-facing surface for provisioning mining capacity and tracking returns, plus the internal views for rig health. Heavy data density meant establishing a strict type and spacing scale before any screen work began.',
-    tags: ['Crypto', 'Mining', 'Design System', 'Data Density'],
-  },
-  {
-    id: 'dao',
-    title: 'DAO Platform',
-    client: 'Universidade Libertária',
-    year: '2022',
-    role: 'UX/UI Designer — Volunteer',
-    mockup: 'mobile',
-    summary:
-      'A decentralised autonomous organisation, designed from zero with three front-end developers.',
-    detail:
-      'Governance and proposal voting for a community that had never used a DAO interface before. Usability testing ran inside the community Discord, and the findings became the personas and user flows that shaped the build.',
-    tags: ['Web3', 'DAO', 'Mobile App', 'User Research'],
-  },
-  {
-    id: 'ecommerce',
-    title: 'E-commerce UX',
-    client: 'Mamba Digital',
-    year: '2021',
-    role: 'UX/UI Designer',
-    mockup: 'web',
-    summary:
-      'Storefront and checkout work grounded in neuromarketing and consumer psychology.',
-    detail:
-      'Flows, wireframes and high-fidelity UI for web and mobile storefronts, validated through surveys, interviews and usability testing. Also led the componentisation effort that gave the team reusable patterns instead of one-off screens.',
-    tags: ['E-commerce', 'Neuromarketing', 'Componentization', 'Testing'],
   },
 ];
 

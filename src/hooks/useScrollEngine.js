@@ -7,9 +7,12 @@ import { scrollState } from '../lib/scroll.js';
 export function useScrollEngine(actCount, enabled = true) {
   useEffect(() => {
     if (!enabled) return;
-    const maxI = Math.max(1, actCount - 1);
-    const step = 1 / maxI;
-    const clamp = (v) => Math.max(0, Math.min(1, v));
+    /* The acts sit on a ring, not a line: there are `actCount` transitions, the
+       last of which carries the finale back into the intro, so one full turn is
+       progress 0..1 and act i sits at i / actCount. */
+    const N = Math.max(2, actCount);
+    const step = 1 / N;
+    const wrap01 = (v) => ((v % 1) + 1) % 1;
 
     let target = 0, current = 0, prev = 0, vel = 0, lastInput = -9999, lastT = 0, raf;
 
@@ -34,7 +37,7 @@ export function useScrollEngine(actCount, enabled = true) {
 
     const nudge = (d) => {
       if (blocked()) return;
-      target = clamp(target + d);
+      target += d;
       target = Math.max(current - LEAD, Math.min(current + LEAD, target));
       lastInput = performance.now();
     };
@@ -95,12 +98,19 @@ export function useScrollEngine(actCount, enabled = true) {
       if (blocked()) return;
       if (['ArrowDown', 'PageDown', ' '].includes(e.key)) { nudge(step); e.preventDefault(); }
       else if (['ArrowUp', 'PageUp'].includes(e.key)) { nudge(-step); e.preventDefault(); }
-      else if (e.key === 'Home') { target = 0; lastInput = performance.now(); }
-      else if (e.key === 'End') { target = 1; lastInput = performance.now(); }
+      else if (e.key === 'Home') { goAct(0); }
+      else if (e.key === 'End') { goAct(N - 1); }
     };
 
-    // let nav jump to a specific act
-    window.__goAct = (i) => { target = clamp(i / maxI); lastInput = performance.now(); };
+    /* Nav jumps take the short way round the ring — from the finale, act 0 is
+       one step forward rather than six back. */
+    const goAct = (i) => {
+      let d = i * step - wrap01(current);
+      if (d > 0.5) d -= 1; else if (d < -0.5) d += 1;
+      target = current + d;
+      lastInput = performance.now();
+    };
+    window.__goAct = goAct;
 
     /* All easing is `1 - base^dt` so the feel is identical at 60Hz and 144Hz —
        a plain per-frame factor converges 2.4x faster on a 144Hz display. */
@@ -112,11 +122,16 @@ export function useScrollEngine(actCount, enabled = true) {
 
       // soft snap to nearest act shortly after input stops
       if (performance.now() - lastInput > 520) {
-        const snap = Math.round(target * maxI) / maxI;
+        const snap = Math.round(target * N) / N;
         target += (snap - target) * ease(0.03, dt);
       }
       current += (target - current) * ease(0.09, dt);
       if (Math.abs(target - current) < 1e-5) current = target;
+
+      /* Shift the whole set by the same turn so the loop is seamless: the gap
+         between target and current is preserved, and velocity does not spike. */
+      if (current >= 1)     { current -= 1; target -= 1; prev -= 1; }
+      else if (current < 0) { current += 1; target += 1; prev += 1; }
 
       // Low-pass the velocity. Consumers (camera roll, azimuth whip, FOV, sax
       // lean) read this every frame, so raw per-frame deltas show up as jitter.

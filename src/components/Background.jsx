@@ -204,6 +204,12 @@ export default function Background({ layer = 'front' }) {
   return (
     <div id={layer === 'back' ? 'webgl-back' : 'webgl'} ref={wrap}>
       <Canvas
+        /* r3f writes pointer-events:auto inline on its own container div, which
+           outranks the `none` on #webgl and made the canvas swallow hover and
+           clicks for every act underneath it. Passing style here is the only
+           way to beat an inline declaration without !important — r3f spreads
+           this after its defaults. */
+        style={{ pointerEvents: 'none' }}
         /* phones pay for every pixel twice over on a scene this heavy */
         dpr={typeof window !== 'undefined' && window.innerWidth < 760 ? [1, 1.5] : [1, 2]}
         shadows

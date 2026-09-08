@@ -1,22 +1,20 @@
 import { useEffect, useRef } from 'react';
 import { ACTS } from '../lib/acts.js';
 import { scrollState } from '../lib/scroll.js';
-import { PROFILE, SKILLS, CREDENTIALS, PURSUITS, EXPERIENCE } from '../lib/data.js';
+import { PROFILE, CREDENTIALS, PURSUITS, EXPERIENCE } from '../lib/data.js';
 import { asset } from '../lib/asset.js';
 import Portfolio from './Portfolio.jsx';
 import Articles from './Articles.jsx';
+import Capabilities from './Capabilities.jsx';
 
-const maxI = ACTS.length - 1;
+const N = ACTS.length;
 const smooth = (t) => t * t * (3 - 2 * t);
 
-const SKILL_ROWS = [
-  { key: 'product', label: 'Product' },
-  { key: 'ux', label: 'UX' },
-  { key: 'ui', label: 'UI' },
-  { key: 'tooling', label: 'Tooling' },
-  { key: 'code', label: 'Code' },
-  { key: 'mind', label: 'Cognition' },
-];
+/* Distance from an act to the playhead, measured the short way round the ring.
+   This is what lets the finale cross-fade straight into the intro instead of
+   whipping back through every act in between. */
+const ringD = (d) => { const m = ((d % N) + N) % N; return m > N / 2 ? m - N : m; };
+
 
 function ActContent({ act }) {
   if (act.kind === 'intro') {
@@ -60,24 +58,7 @@ function ActContent({ act }) {
 
   if (act.kind === 'articles') return <Articles />;
 
-  if (act.kind === 'skills') {
-    return (
-      <div className="act-col skills">
-        <div className="skill-rows" data-par>
-          {SKILL_ROWS.map((r, ri) => (
-            <div className="skill-row" key={r.key} style={{ '--c': ri }}>
-              <h3>{r.label}</h3>
-              <ul>
-                {SKILLS[r.key].map((v, vi) => (
-                  <li key={v} style={{ '--i': vi }}>{v}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  if (act.kind === 'skills') return <Capabilities />;
 
   if (act.kind === 'dossier') {
     return (
@@ -120,8 +101,8 @@ function ActContent({ act }) {
       </h3>
 
       <h2 className="ct-title" data-par>
-        <span>LET’S</span>
-        <span className="stroke">BUILD.</span>
+        <span><i style={{ '--i': 0 }}>LET’S</i></span>
+        <span className="stroke"><i style={{ '--i': 1 }}>BUILD.</i></span>
       </h2>
 
       <a className="ct-mail" href={`mailto:${PROFILE.email}`} data-par>
@@ -129,16 +110,16 @@ function ActContent({ act }) {
       </a>
 
       <div className="ct-links" data-par>
-        <a href={L.figma.url} target="_blank" rel="noreferrer">
+        <a style={{ '--i': 0 }} href={L.figma.url} target="_blank" rel="noreferrer">
           <span className="k">Figma</span><span className="v">{L.figma.handle}</span>
         </a>
-        <a href={L.github.url} target="_blank" rel="noreferrer">
+        <a style={{ '--i': 1 }} href={L.github.url} target="_blank" rel="noreferrer">
           <span className="k">GitHub</span><span className="v">{L.github.handle}</span>
         </a>
-        <a href={L.linkedin.url} target="_blank" rel="noreferrer">
+        <a style={{ '--i': 2 }} href={L.linkedin.url} target="_blank" rel="noreferrer">
           <span className="k">LinkedIn</span><span className="v">{L.linkedin.handle}</span>
         </a>
-        <a href={`tel:${PROFILE.phone.replace(/[^+\d]/g, '')}`}>
+        <a style={{ '--i': 3 }} href={`tel:${PROFILE.phone.replace(/[^+\d]/g, '')}`}>
           <span className="k">Phone</span><span className="v">{PROFILE.phone}</span>
         </a>
       </div>
@@ -159,11 +140,11 @@ export default function Stage() {
     let raf;
     let lastActive = -1;
     const loop = () => {
-      const p = scrollState.progress * maxI;
+      const p = scrollState.progress * N;
       for (let i = 0; i < layers.current.length; i++) {
         const el = layers.current[i];
         if (!el) continue;
-        const d = p - i;
+        const d = ringD(p - i);
         const ad = Math.abs(d);
         const op = smooth(Math.max(0, 1 - ad));
         el.style.opacity = op;
@@ -182,11 +163,17 @@ export default function Stage() {
           par[k].style.opacity = String(Math.max(0, 1 - ad * 1.2));
         }
       }
-      const ai = Math.round(p);
+      const ai = ((Math.round(p) % N) + N) % N;
       if (ai !== lastActive) {
         lastActive = ai;
         dots.current.forEach((dt, i) => dt && dt.classList.toggle('on', i === ai));
-        layers.current.forEach((el, i) => el && el.classList.toggle('is-active', i === ai));
+        layers.current.forEach((el, i) => {
+          if (!el) return;
+          el.classList.toggle('is-active', i === ai);
+          // sticky: an act that has been reached keeps the class for good, so a
+          // reveal written against it plays in and never plays back out
+          if (i === ai) el.classList.add('has-entered');
+        });
       }
       raf = requestAnimationFrame(loop);
     };

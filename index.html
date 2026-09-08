@@ -3,8 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Guilherme Carvalho — Product Designer & UX/UI Designer. Industrial dossier portfolio." />
-    <title>Guilherme Ribeiro - Product Designer & UX/UI Designer</title>
+
+    <title><!--@name--> — Head of Product &amp; Product Designer</title>
+    <meta name="description" content="<!--@description-->" />
+    <meta name="author" content="<!--@name-->" />
+    <link rel="canonical" href="https://sentidofront.github.io/portfoliofinal/" />
+
+    <!-- Crawl and index freely, and follow the links out to the profiles. The
+         AI agents are named explicitly in robots.txt rather than being left to
+         a default, because being read by them is the point of this page. -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="<!--@name-->" />
+    <meta property="og:title" content="<!--@name--> — Head of Product &amp; Product Designer" />
+    <meta property="og:description" content="<!--@description-->" />
+    <meta property="og:url" content="https://sentidofront.github.io/portfoliofinal/" />
+    <meta property="og:image" content="https://sentidofront.github.io/portfoliofinal/work/reune-hero.webp" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="profile:first_name" content="<!--@firstname-->" />
+    <meta property="profile:last_name" content="<!--@lastname-->" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<!--@name--> — Head of Product &amp; Product Designer" />
+    <meta name="twitter:description" content="<!--@description-->" />
+    <meta name="twitter:image" content="https://sentidofront.github.io/portfoliofinal/work/reune-hero.webp" />
+
+    <meta name="theme-color" content="#d1c4b9" />
+    <link rel="alternate" type="text/plain" href="/portfoliofinal/llms.txt" title="Plain-text summary for language models" />
+
+    <!--@jsonld-->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,6 +43,12 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- The whole page is painted by React onto a WebGL stage, so a reader that
+         does not run scripts would otherwise get an empty document. This is the
+         same content in plain markup. -->
+    <!--@noscript-->
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
